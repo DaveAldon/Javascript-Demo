@@ -4,8 +4,6 @@
  * David Crawford
  */
 
-/////window.onload = function()
-
 /**
  * Given a node with id {rootId}, the following function finds all its descendant
  * elements having its attribute ID set. The function returns the number of
@@ -16,20 +14,15 @@
  * @returns {number}
  */
 function findElementsWithId(rootId, klazName) {
-    /* complete this function */
-    console.log(rootId);
-
-    var descendents = document.querySelectorAll('#' + rootId + ' > *');
-    var i, e;
+    var children = Array.prototype.slice.call(document.getElementById(rootId).children);
     var count = 0;
-    for (i = 0; i < descendents.length; ++i) {
-        e = descendents[i];
-        if (e.hasAttribute('id')) {
-            console.log(e);
+
+    children.forEach(function(element) {
+        if (element.id) {
+            element.className += klazName;
             count++;
-            e.className = klazName;
         }
-    }
+    });
     return count;
 }
 
@@ -70,6 +63,5 @@ function createTable() {
             rowElem.appendChild(colElem);
         }
         table.appendChild(rowElem);
-
     }
 }
